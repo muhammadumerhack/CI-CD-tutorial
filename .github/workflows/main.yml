@@ -13,17 +13,24 @@ on:
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  deploy:
+  start:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-  
+    
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     -  uses: actions/checkout@v2
-    -  run: echo Starting Deployment to Heroku
-    -  run:  git remote add heroku https://git.heroku.com/cicdtutorial1.git
-    -  run:  git remote -v
+    - uses: akhileshns/heroku-deploy@v3.4.6 # This is the action
+      with:
+              # This will be used for authentication. You can find it in your heroku homepage account settings
+              heroku_api_key:  ${{ secrets.HEROKU_API_KEY }}
+              # Email that you use with heroku
+              heroku_email: "umer1807f@aptechsite.net" 
+              # The appname to use for deploying/updating
+              heroku_app_name: "cicdtutorial1"
+              branch: master
+              dontuseforce: false
     - name: Login to Heroku Container registry
       env: 
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
@@ -31,18 +38,9 @@ jobs:
     - name: Build and push
       env:
         HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      
-    - name: Deploy to Heroku
-      uses: AkhileshNS/heroku-deploy@v3.4.6
-      with:
-              # This will be used for authentication. You can find it in your heroku homepage account settings
-              heroku_api_key:  ${{ secrets.HEROKU_API_KEY }}
-              # Email that you use with heroku
-              heroku_email: umer1807f@aptechsite.net 
-              # The appname to use for deploying/updating
-              heroku_app_name: cicdtutorial1
-     
-#     -  run:  git config --global user.email "umer1807f@aptechsite.net"
+      run : git push heroku master 
+    
+   #     -  run:  git config --global user.email "umer1807f@aptechsite.net"
 #     -  run:  git config --global user.name "You"
 #     -  run:  git add .
 #     -  run:  git commit -m "Deployment Through GitActions"     
