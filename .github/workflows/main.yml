@@ -24,7 +24,7 @@ jobs:
     -  run: echo Starting Deployment to Heroku
     -  run:  git remote add heroku https://git.heroku.com/cicdtutorial1.git
     -  run:  git remote -v
-    -  run:  git add.
+    -  run:  git add .
     -  run:  git commit -m "Deployment Through GitActions"     
     -  run:  git push heroku master
 
