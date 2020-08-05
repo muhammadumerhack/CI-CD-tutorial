@@ -22,7 +22,8 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     -  uses: actions/checkout@v2
     -  run: echo Starting Deployment to Heroku
-    -  run:  git heroku master https://git.heroku.com/cicdtutorial1.git
+    -  run:  git remote add heroku https://git.heroku.com/cicdtutorial1.git
+    -  run:  git remote -v
     -  run:  git add.
     -  run:  git commit -m "Deployment Through GitActions"     
     -  run:  git push heroku master
