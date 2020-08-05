@@ -16,33 +16,15 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest windows-latest
-
+    
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@v2
-
-    # Runs a set of commands using the runners shell
-    - name: test
-    - run: echo Starting Test
-    -  run:  npm ci
-    -  run:  npm test
-    -  run:  npm run build
-  deploy:
-    # The type of runner that the job will run on
-    runs-on: ubuntu-latest windows-latest macos-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
-    steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-    - uses: actions/heroku@master
-    - uses: build
-    # Runs a set of commands using the runners shell
-    - name: deploy
     - run: echo Starting Deployment to Heroku
     -  run:  git heroku master https://git.heroku.com/cicdtutorial1.git
     -  run:  git add.
     -  run:  git commit -m "Deployment Through GitActions"     
     -  run:  git push heroku master
 
+   
